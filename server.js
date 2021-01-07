@@ -11,6 +11,9 @@ app.use(express.json());
 
 app.post('/', async (req, res, next) => {
     const {url, select_fields} = req.body.csv;
+    let ext = url.slice(url.length - 4);
+    if (ext !== '.csv') return res.statusCode(400).json({error: "Please enter a valid csv file in url"})
+
     request.get(url).then(csv => {
         // Get all the titles
         let titles = csv.slice(0, csv.indexOf('\n')).split(',');
@@ -48,7 +51,10 @@ app.post('/', async (req, res, next) => {
         });
         
 
-        return res.json(JSON.parse(JSON.stringify(result)));
+        return res.json({
+              conversion_key: crypto.randomBytes(32).toString().slice(0, 32);
+              json: JSON.parse(JSON.stringify(result))
+        });
     })
     
 })
