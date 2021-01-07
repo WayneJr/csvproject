@@ -1,7 +1,11 @@
 const express        = require('express'),
       app            = express(),
       request        = require('request-promise'),
-      port           = process.env.PORT || 4000;
+      crypto         = require('crypto'),
+
+
+
+   port        = process.env.PORT || 4000;
 
 
 
