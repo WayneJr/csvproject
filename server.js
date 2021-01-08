@@ -56,7 +56,7 @@ app.post('/', async (req, res, next) => {
         
 
         return res.json({
-              conversion_key: crypto.randomBytes(32).toString().slice(0, 32);
+              conversion_key: crypto.randomBytes(32).toString().slice(0, 32),
               json: JSON.parse(JSON.stringify(result))
         });
     })
